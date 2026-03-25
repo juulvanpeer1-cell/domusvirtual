@@ -1,0 +1,859 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="logo favicon.png">
+ 
+</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Domus Virtual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f3ef;
+      --warm-white: #ede9e2;
+      --mid: #c0b9ad;
+      --accent: #8a7a6a;
+      --dark-section: #111109;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Outfit', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 52px;
+      height: 76px;
+      background: rgba(245,243,239,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 2rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .logo span { font-size: 1.35rem; margin-left: -8px; font-style: italic; font-weight: 400; }
+
+    nav { display: flex; gap: 40px; align-items: center; }
+    nav a {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      position: relative;
+      opacity: 0.7;
+      transition: opacity 0.25s;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 100%;
+      height: 1px;
+      background: var(--black);
+      transition: right 0.3s ease;
+    }
+    nav a:hover { opacity: 1; }
+    nav a:hover::after, nav a.active::after { right: 0; }
+    nav a.active { opacity: 1; }
+
+    .header-cta {
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border: 1px solid rgba(0,0,0,0.3);
+      padding: 9px 22px;
+      transition: all 0.25s;
+    }
+    .header-cta:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 76px;
+      background: var(--black);
+      color: var(--white);
+      padding-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-inner {
+      padding: 80px 52px 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .page-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 300;
+      line-height: 0.95;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--mid); }
+    .page-hero-desc {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: rgba(237,233,226,0.55);
+      max-width: 420px;
+      align-self: end;
+      padding-bottom: 4px;
+    }
+
+    /* ─── FILTER BAR ─── */
+    .filter-bar {
+      background: var(--warm-white);
+      padding: 24px 52px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-right: 12px;
+    }
+    .filter-btn {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: none;
+      border: 1px solid rgba(0,0,0,0.18);
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: all 0.22s;
+      opacity: 0.65;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      opacity: 1;
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* ─── PORTFOLIO GRID ─── */
+    .portfolio-section {
+      padding: 80px 52px 120px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 80px;
+    }
+.portfolio-item {
+  text-decoration: none;  /* TOEVOEGEN */
+}
+.portfolio-item-cta {
+  text-decoration: none;  /* TOEVOEGEN */
+}
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--dark-section);
+      cursor: pointer;
+    }
+    .portfolio-item.featured {
+      grid-column: span 2;
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: transform 0.7s ease, opacity 0.4s ease;
+      display: block;
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+    
+    .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
+   .portfolio-item-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 28px;
+  background: linear-gradient(to top, rgba(10,10,9,0.85) 0%, transparent 0%);
+  z-index: 3;  /* HOGER dan de overlay */
+  transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-item-info {
+  transform: translateY(-4px);  /* beweegt licht omhoog bij hover */
+}
+    .portfolio-item-cat {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .portfolio-item-name {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+  transition: font-size 0.3s ease;  /* TOEVOEGEN */
+}
+
+.portfolio-item:hover .portfolio-item-name {
+  font-size: 1.5rem;  /* iets groter bij hover */
+}
+    .portfolio-item-cta {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .portfolio-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,9,0.82) 0%, rgba(131, 131, 131, 0.1) 15%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 36px 36px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .portfolio-item:hover .portfolio-item-cta { color: var(--white); }
+    .portfolio-item-cta::after { content: '→'; }
+
+    /* ─── FEATURED PROJECT DETAIL ─── */
+    .project-detail {
+      background: var(--dark-section);
+      color: var(--white);
+      padding: 100px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 0px;
+    }
+    .project-detail-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      position: relative;
+    }
+    .project-detail-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+    .project-detail-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .project-number {
+      font-family: var(--serif);
+      font-size: 6rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.05);
+      line-height: 1;
+      margin-bottom: -20px;
+      display: block;
+    }
+    .project-detail h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .project-detail h2 em { font-style: italic; color: var(--mid); }
+    .project-detail p {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: rgba(237,233,226,0.58);
+      margin-bottom: 36px;
+    }
+    .project-detail-meta {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 44px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .meta-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--mid);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      background: var(--warm-white);
+      padding: 14px 32px;
+      transition: all 0.25s;
+    }
+    .btn-primary:hover { background: var(--white); }
+
+    .btn-ghost-dark {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid rgba(237,233,226,0.3);
+      padding: 14px 32px;
+      transition: all 0.25s;
+    }
+    .btn-ghost-dark:hover { border-color: var(--white); }
+
+    /* ─── CTA STRIP ─── */
+    .cta-strip {
+      background: var(--warm-white);
+      padding: 80px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .cta-strip h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+    .cta-strip h2 em { font-style: italic; }
+    .cta-actions { display: flex; gap: 16px; flex-shrink: 0; }
+
+    .btn-primary-dark {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      background: var(--black);
+      padding: 14px 32px;
+      transition: all 0.25s;
+    }
+    .btn-primary-dark:hover { background: var(--warm-white); color: var(--black);       border: 1px solid rgba(0,0,0,0.3);}
+
+    .btn-outline {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border: 1px solid rgba(0,0,0,0.3);
+      padding: 14px 32px;
+      transition: all 0.25s;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark-section);
+      color: var(--white);
+      padding: 80px 52px 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 64px;
+    }
+    .footer-brand .logo { color: var(--white); font-size: 1.1rem; display: block; margin-bottom: 20px; }
+    .footer-brand .logo span { font-size: 0.7425rem; }
+    .footer-tagline { font-size: 0.82rem; line-height: 1.8; color: rgba(237,233,226,0.45); max-width: 280px; }
+    .footer-col h4 {
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 22px;
+    }
+    .footer-col a {
+      display: block; font-size: 0.82rem; color: rgba(237,233,226,0.55);
+      text-decoration: none; margin-bottom: 12px; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06); padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copyright { font-size: 0.72rem; color: rgba(237,233,226,0.3); letter-spacing: 0.04em; }
+    .social-row { display: flex; gap: 16px; margin-top: 28px; }
+    .social-icon {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(237,233,226,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--mid); text-decoration: none; transition: all 0.25s;
+    }
+    .social-icon:hover { border-color: var(--white); color: var(--white); }
+    .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ─── ANIMATIONS ─── */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── MOBILE MENU ─── */
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 200; }
+    .menu-toggle span { display: block; width: 24px; height: 1.5px; background: var(--black); transition: all 0.3s ease; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-nav { display: flex; position: fixed; inset: 0; background: var(--white); z-index: 999; flex-direction: column; align-items: flex-start; justify-content: center; padding: 52px; gap: 4px; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s; pointer-events: none; }
+    .mobile-nav.open { opacity: 1; visibility: visible; transform: translateY(0); transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0s; pointer-events: auto; }
+    .mobile-nav a { font-family: var(--serif); font-size: clamp(2.2rem, 9vw, 3.8rem); font-weight: 300; color: var(--black); text-decoration: none; line-height: 1.25; transition: color 0.2s; opacity: 0.85; }
+    .mobile-nav a:hover { color: var(--accent); opacity: 1; }
+    .mobile-nav a.active { color: var(--mid); opacity: 1; }
+    .mobile-nav-close { 
+      position: absolute; 
+      top: 26px; right: 28px; 
+      font-size: 3rem; 
+      background: none; 
+      border: none; 
+      cursor: pointer; 
+      color: var(--black); 
+      font-family: var(--serif); 
+      opacity: 0.4; 
+      transition: opacity 0.2s; 
+      line-height: 1; }
+    .mobile-nav-close:hover { opacity: 1; }
+    .mobile-nav-cta { margin-top: 36px !important; font-family: var(--sans) !important; font-size: 0.72rem !important; font-weight: 300 !important; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(0,0,0,0.3) !important; padding: 14px 28px !important; color: var(--black) !important; opacity: 1 !important; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+      header { padding: 0 24px; }
+      .logo { font-size: 1.5rem; }
+      .logo span { font-size: 0.7rem; }
+      nav { display: none; }
+      .page-hero-inner { grid-template-columns: 1fr; padding: 60px 24px 52px; gap: 24px; }
+      .pricing-section { padding: 60px 24px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .compare-section { padding: 0 24px 60px; }
+      .faq-section { padding: 60px 24px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-item summary { padding: 24px; }
+      .faq-a { padding: 0 24px 24px; }
+      .quote-section { padding: 60px 24px; }
+      .quote-inner { grid-template-columns: 1fr; gap: 52px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      footer { padding-left: 24px; padding-right: 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+
+      /* ─── PORTFOLIO MOBIEL ─── */
+      .filter-bar { padding: 16px 20px; gap: 6px; }
+      .portfolio-section { padding: 32px 16px 60px; }
+      .portfolio-grid { grid-template-columns: 1fr; gap: 2px; }
+      .portfolio-item.featured { grid-column: span 1; }
+      .portfolio-item img { min-height: 240px; }
+
+      /* ─── PROJECT DETAIL MOBIEL ─── */
+      .project-detail { grid-template-columns: 1fr; padding: 52px 20px; gap: 28px; }
+      .project-detail[style*="row-reverse"] { grid-template-columns: 1fr; }
+      .project-detail-img { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 16/9; }
+      .project-detail-content { grid-column: auto !important; grid-row: auto !important; }
+      .project-number { font-size: 4rem; margin-bottom: -12px; }
+      .project-detail h2 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+      .project-detail-meta { flex-wrap: wrap; gap: 20px; }
+
+      /* ─── CTA STRIP MOBIEL ─── */
+      .cta-strip { flex-direction: column; padding: 52px 20px; align-items: flex-start; gap: 24px; }
+      .cta-actions { flex-wrap: wrap; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileMenu()">×</button>
+    <a href="index.html">Home</a>
+    <a href="domus-virtual-portfolio.html" class="active">Portfolio</a>
+    <a href="domus-virtual-pricing.html">Pricing</a>
+    <a href="domus-virtual-contact.html">Contact</a>
+    <a href="domus-virtual-pricing.html#offerte" class="mobile-nav-cta">Gratis offerte</a>
+  </div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <a href="index.html" class="logo">Domus <span>Virtual</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="domus-virtual-portfolio.html" class="active">Portfolio</a>
+      <a href="domus-virtual-pricing.html">Pricing</a>
+      <a href="domus-virtual-contact.html">Contact</a>
+    </nav>
+    <a href="domus-virtual-pricing.html#offerte" class="header-cta">Gratis offerte</a>
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- ═══ PAGE HERO ═══ -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="reveal" style="opacity:1;transform:none;">
+        <span class="page-eyebrow">Ons werk</span>
+        <h1>Elk pand,<br><em>perfect</em><br>in beeld</h1>
+      </div>
+      <p class="page-hero-desc reveal" style="opacity:1;transform:none;">
+        Van privéwoningen tot bruisende restaurants en exclusieve trouwlocaties — wij brengen iedere ruimte tot leven met meeslepende 360° virtuele tours die bezoekers overtuigen nog voor ze de deur binnenstappen.
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ FILTER BAR ═══ -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="all">Alles</button>
+    <button class="filter-btn" data-filter="horeca">Restaurants &amp; Horeca</button>
+    <button class="filter-btn" data-filter="studio">Studio's</button>
+    <button class="filter-btn" data-filter="woning">Privéwoningen</button>
+    <button class="filter-btn" data-filter="hotel">Hotels &amp; Airbnb's</button>
+    <button class="filter-btn" data-filter="event">Trouwlocaties</button>
+  </div>
+
+  <!-- ═══ PORTFOLIO GRID ═══ -->
+  <section class="portfolio-section">
+    <div class="portfolio-grid" id="portfolioGrid">
+
+      <!-- Project 1: Hert Turnhout (Restaurants & Horeca) -->
+      <a href="domus-virtual-project-hert.html" class="portfolio-item featured reveal" data-category="horeca" style="text-decoration:none;" >
+  <img src="hert 1.jpg" alt="Hert">
+  <div class="portfolio-item-info">
+    <div class="portfolio-item-cat">Restaurant · Michelin ★ · Turnhout</div>
+    <div class="portfolio-item-name">Hert</div>
+    <div class="portfolio-item-cta">Bekijk project </div>
+  </div>
+</a>
+        
+
+
+      <!-- Project 2: Shauni Broothaers Studio (Alles + Studio) -->
+       <a href="domus-virtual-project-studio-sb.html" class="portfolio-item reveal" data-category="studio" style="text-decoration:none;">
+  <img src="studio sb 4.jpg" alt="Shauni Broothaers Studio\">
+  <div class="portfolio-item-info">
+    <div class="portfolio-item-cat">Fotostudio · Beerse</div>
+    <div class="portfolio-item-name">Shauni Broothaers Studio</div>
+    <div class="portfolio-item-cta">Bekijk project </div>
+  </div>
+</a>
+
+
+
+      <!--Project 3: De Farmasie (alles + restaurants & horeca) -->
+        <a href="domus-virtual-project-farmasie.html" class="portfolio-item reveal" data-category="horeca" style="text-decoration:none;">
+      <div class="portfolio-item reveal" data-category="horeca">
+        <img src="farma 8.jpg" alt="De Farmasie" />
+        <div class="portfolio-item-info">
+          <div class="portfolio-item-cat">Restaurant · Vosselaar</div>
+          <div class="portfolio-item-name">De Farmasie</div>
+          <div class="portfolio-item-cta">Bekijk tour</div>
+        </div>
+      </div>
+</a>
+      <!--
+      Categorieën: horeca | studio | woning | hotel | event
+      featured (= class "featured") = neemt 2 kolommen in
+      -->
+
+
+
+</a>
+      </div>
+
+      <!--
+      ══ NIEUW PROJECT TOEVOEGEN aan het grid ══
+      Kopieer dit blok en pas aan:
+
+      <div class="portfolio-item reveal" data-category="horeca">
+        <img src="jouw-foto.jpg" alt="Projectnaam" />
+        <div class="portfolio-item-info">
+          <div class="portfolio-item-cat">Type · Stad</div>
+          <div class="portfolio-item-name">Projectnaam</div>
+          <div class="portfolio-item-cta">Bekijk tour</div>
+        </div>
+        <div class="portfolio-item-overlay">
+          <a href="https://captur3d.io/view/domus/..." target="_blank" class="btn-primary" style="align-self:flex-start;">Tour bekijken</a>
+        </div>
+      </div>
+      Categorieën: horeca | studio | woning | hotel | event
+      featured (= class "featured") = neemt 2 kolommen in
+      -->
+
+    </div>
+  </section>
+
+  <!-- ═══ PROJECT DETAILS ═══ -->
+
+  <!-- Project 01: Hert Turnhout -->
+  <section class="project-detail">
+    <div class="project-detail-img reveal">
+      <!-- ▼ Vervang door jouw echte foto -->
+  <img src="hert 10.jpg" alt="Hert, Turnhout" />
+    </div>
+    <div class="project-detail-content reveal">
+      <span class="project-number">01</span>
+      <h2>Hert,<br><em>Turnhout</em></h2>
+      <p>Hert, bekroond met zijn eerste Michelinster in 2023 onder leiding van Alex Verhoeven, belichaamt verfijnde gastronomie op het hoogste niveau. Panoramische uitzichten over de stad vormen het decor voor een exclusieve ervaring waar smaak, luxe en uitzicht naadloos samenkomen.</p>
+      <div class="project-detail-meta">
+        <div class="meta-item">
+          <div class="meta-label">Type</div>
+          <div class="meta-value">Restaurant</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Locatie</div>
+          <div class="meta-value">Turnhout, BE</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Formaat</div>
+          <div class="meta-value">360° interactief</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="domus-virtual-project-hert.html" class="btn-primary">Bekijk project</a>
+        <a href="domus-virtual-pricing.html#offerte" class="btn-ghost-dark">Offerte aanvragen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project 02: Shauni Broothaers Studio -->
+  <section class="project-detail" style="flex-direction:row-reverse;">
+    <div class="project-detail-img reveal" style="grid-column:2;">
+      <!-- ▼ Vervang door jouw echte foto -->
+  <img src="studio sb 3.jpg"
+    alt="Shauni Broothaers Studio">
+    </div>
+    <div class="project-detail-content reveal" style="grid-column:1; grid-row:1;">
+      <span class="project-number">02</span>
+      <h2>Shauni Broothaers<br><em>Studio</em></h2>
+      <p>Een creatieve fotostudio gespecialiseerd in storytelling fotografie, waar échte emoties en spontane momenten centraal staan. Gelegen aan het water biedt de studio een prachtige lichtinval en een modern, stijlvol decor dat elke shoot naar een hoger niveau tilt.</p>
+      <div class="project-detail-meta">
+        <div class="meta-item">
+          <div class="meta-label">Type</div>
+          <div class="meta-value">Fotostudio</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Locatie</div>
+          <div class="meta-value">Beerse, BE</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Formaat</div>
+          <div class="meta-value">360° interactief</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="domus-virtual-project-studio-sb.html" class="btn-primary">Bekijk project</a>
+        <a href="domus-virtual-pricing.html#offerte" class="btn-ghost-dark">Offerte aanvragen</a>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  ══ NIEUW PROJECT DETAIL TOEVOEGEN ══
+  Kopieer dit blok (wissel "row-reverse" af voor afwisselende layout):
+
+  <section class="project-detail">
+    <div class="project-detail-img reveal">
+      <img src="jouw-foto.jpg" alt="Projectnaam" />
+    </div>
+    <div class="project-detail-content reveal">
+      <span class="project-number">03</span>
+      <h2>Projectnaam,<br><em>Stad</em></h2>
+      <p>Beschrijving...</p>
+      <div class="project-detail-meta">
+        <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Restaurant</div></div>
+        <div class="meta-item"><div class="meta-label">Locatie</div><div class="meta-value">Stad, BE</div></div>
+        <div class="meta-item"><div class="meta-label">Formaat</div><div class="meta-value">360° interactief</div></div>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="https://captur3d.io/view/domus/..." target="_blank" class="btn-primary">Tour bekijken</a>
+        <a href="domus-virtual-pricing.html#offerte" class="btn-ghost-dark">Offerte aanvragen</a>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <!-- ═══ CTA STRIP ═══ -->
+  <div class="cta-strip reveal">
+    <div>
+      <h2>Jouw ruimte als<br><em>volgende project?</em></h2>
+    </div>
+    <div class="cta-actions">
+      <a href="domus-virtual-pricing.html" class="btn-primary-dark">Gratis offerte</a>
+      <a href="domus-virtual-contact.html" class="btn-outline">Neem contact op</a>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Domus <span>Virtual</span></a>
+        <p class="footer-tagline">Wij brengen jouw ruimte in beeld met meeslepende 360° virtuele tours. Overtuig bezoekers nog voor ze binnenstappen.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/domusvirtual" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61587743584401" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigatie</h4>
+        <a href="index.html">Home</a>
+        <a href="domus-virtual-portfolio.html">Portfolio</a>
+        <a href="domus-virtual-pricing.html">Pricing</a>
+        <a href="domus-virtual-contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+32483669952">+32 483 66 99 52</a>
+        <a href="mailto: domus.virtual@outlook.com"><span class="__cf_email__" data-cfemail="43272c2e36306d352a313736222f032c36372f2c2c286d202c2e">domus.virtual@outlook.com</span></a>
+        <a href="https://www.instagram.com/domusvirtual" target="_blank" rel="noopener noreferrer">@domusvirtual</a>
+        <a href="https://www.linkedin.com/in/juul-van-peer-454935355/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 DOMUS Virtual. Alle rechten voorbehouden.</span>
+      <span class="footer-copyright">Belgium</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.10 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Header scroll effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        header.style.borderBottomColor = 'rgba(0,0,0,0.12)';
+        header.style.background = 'rgba(245,243,239,0.97)';
+      } else {
+        header.style.borderBottomColor = 'rgba(0,0,0,0.06)';
+        header.style.background = 'rgba(245,243,239,0.92)';
+      }
+    });
+
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        portfolioItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.style.display = '';
+            setTimeout(() => item.classList.add('visible'), 50);
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileNav').classList.toggle('open');
+      document.getElementById('menuToggle').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
+    }
+  </script>
+</body>
+</html>

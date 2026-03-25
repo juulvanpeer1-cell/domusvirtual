@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <!-- FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="logo favicon.png">
+
+</head>>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De Farmasie | Domus Virtual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --white: #f5f3ef; --warm-white: #ede9e2;
+      --mid: #c0b9ad; --accent: #8a7a6a; --dark-section: #111109;
+      --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'Outfit', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--white); color: var(--black); font-family: var(--sans); font-weight: 300; overflow-x: hidden; }
+
+    /* ─── HEADER ─── */
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 76px; background: rgba(245,243,239,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.06); transition: all 0.3s ease; }
+    .logo { font-family: var(--serif); font-weight: 300; font-size: 2rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--black); text-decoration: none; }
+    .logo span { font-size: 1.35rem; margin-left: -8px; font-style: italic; font-weight: 400; }
+    nav { display: flex; gap: 40px; align-items: center; }
+    nav a { font-family: var(--sans); font-size: 0.72rem; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); text-decoration: none; position: relative; opacity: 0.7; transition: opacity 0.25s; }
+    nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 100%; height: 1px; background: var(--black); transition: right 0.3s ease; }
+    nav a:hover, nav a.active { opacity: 1; }
+    nav a:hover::after, nav a.active::after { right: 0; }
+    .header-cta { font-size: 0.72rem; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); text-decoration: none; border: 1px solid rgba(0,0,0,0.3); padding: 9px 22px; transition: all 0.25s; }
+    .header-cta:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ─── MOBILE MENU ─── */
+    .menu-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 200; }
+    .menu-toggle span { display: block; width: 24px; height: 1.5px; background: var(--black); transition: all 0.3s ease; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 999; flex-direction: column; align-items: flex-start; justify-content: center; padding: 52px; gap: 4px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: var(--serif); font-size: clamp(2.2rem, 9vw, 3.8rem); font-weight: 300; color: var(--black); text-decoration: none; line-height: 1.25; transition: color 0.2s; opacity: 0.85; }
+    .mobile-nav a:hover { color: var(--accent); opacity: 1; }
+    .mobile-nav a.active { color: var(--mid); opacity: 1; }
+    .mobile-nav-close { position: absolute; top: 26px; right: 28px; font-size: 2rem; background: none; border: none; cursor: pointer; color: var(--black); font-family: var(--serif); opacity: 0.4; transition: opacity 0.2s; line-height: 1; }
+    .mobile-nav-close:hover { opacity: 1; }
+    .mobile-nav-cta { margin-top: 36px !important; font-family: var(--sans) !important; font-size: 0.72rem !important; font-weight: 300 !important; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(0,0,0,0.3) !important; padding: 14px 28px !important; color: var(--black) !important; opacity: 1 !important; }
+
+    /* ─── PROJECT HERO ─── */
+    .project-hero {
+      padding-top: 76px;
+      height: 85vh;
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+      background: var(--dark-section);
+    }
+    .project-hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      transition: transform 8s ease;
+    }
+    .project-hero:hover img { transform: scale(1.04); }
+    .project-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,9,0.85) 0%, rgba(10,10,9,0.1) 60%, transparent 100%);
+    }
+    .project-hero-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0 52px 64px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .project-back {
+      position: absolute;
+      top: 100px; left: 52px;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(237,233,226,0.6);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+      z-index: 2;
+    }
+    .project-back:hover { color: var(--white); }
+    .project-back::before { content: '←'; font-size: 1rem; }
+    .project-hero-text { z-index: 2; }
+    .project-cat { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 16px; }
+    .project-hero-text h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; line-height: 0.92; color: var(--white); }
+    .project-hero-text h1 em { font-style: italic; color: var(--mid); }
+    .project-hero-meta { z-index: 2; display: flex; flex-direction: column; gap: 16px; align-items: flex-end; }
+    .meta-pill { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(237,233,226,0.55); border: 1px solid rgba(237,233,226,0.15); padding: 8px 16px; }
+
+    /* ─── PROJECT INFO ─── */
+    .project-info {
+      padding: 80px 52px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 80px;
+      align-items: start;
+      background: var(--white);
+    }
+    .project-description h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; line-height: 1.1; margin-bottom: 28px; }
+    .project-description h2 em { font-style: italic; color: var(--accent); }
+    .project-description p { font-size: 0.9rem; line-height: 1.9; color: rgba(10,10,9,0.6); margin-bottom: 20px; }
+    .project-aside { display: flex; flex-direction: column; gap: 0; border-left: 1px solid rgba(0,0,0,0.07); padding-left: 52px; }
+    .aside-item { padding: 20px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .aside-item:last-child { border-bottom: none; }
+    .aside-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .aside-value { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--black); }
+    .project-cta-row { margin-top: 40px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; font-size: 0.72rem; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--black); background: var(--black); color: var(--white); padding: 14px 32px; transition: all 0.25s; }
+    .btn-primary:hover { background: #222; }
+    .btn-outline { display: inline-block; font-size: 0.72rem; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--black); border: 1px solid rgba(0,0,0,0.3); padding: 14px 32px; transition: all 0.25s; }
+    .btn-outline:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ─── GALLERY ─── */
+    .gallery-section {
+  width: 100%;
+  background: var(--dark-section);
+  
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  width: 75%;
+  margin: 0 auto; 
+
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+}
+
+.gallery-item.wide {
+  grid-column: span 2;
+}
+
+/* DE AFBEELDING */
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  opacity: 0.85;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+/* VIDEO */
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  opacity: 0.85;
+  transition: transform 0.6s ease, opacity 0.4s ease;
+}
+/* DONKERE OVERLAY (vignet) */
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(10,10,9,0.6) 100%);
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+/* HOVER */
+.gallery-item:hover img {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.gallery-item:hover::after {
+  opacity: 0;
+}
+
+    /* ─── TOUR EMBED ─── */
+    .tour-section { background: var(--white); padding: 80px 52px; }
+    .tour-header { margin-bottom: 48px; }
+    .tour-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--black); line-height: 1.05; }
+    .tour-header h2 em { font-style: italic; color: var(--mid); }
+    .tour-header p { font-size: 0.88rem; color: rgba(10,10,9,0.5); margin-top: 16px; }
+    .captur3d-3d-tour { text-align: center; }
+    .captur3d-3d-tour iframe { min-height: 360px; width: 100%; margin: 0; border: none; }
+    @media screen and (min-width: 992px) {
+      .captur3d-3d-tour iframe { height: 675px; max-width: 100%; display: block; }
+    }
+
+    /* ─── NEXT PROJECT / CTA ─── */
+    .project-cta-strip { background: var(--warm-white); padding: 80px 52px; display: flex; align-items: center; justify-content: space-between; gap: 40px; border-top: 1px solid rgba(0,0,0,0.07); }
+    .project-cta-strip h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; line-height: 1.1; }
+    .project-cta-strip h2 em { font-style: italic; }
+    .cta-actions { display: flex; gap: 14px; flex-shrink: 0; }
+    .btn-dark { display: inline-block; font-size: 0.72rem; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--black); padding: 14px 32px; transition: all 0.25s; }
+    .btn-dark:hover { background: #222; }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--dark-section); color: var(--white); padding: 80px 52px 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px; margin-bottom: 64px; }
+    .footer-brand .logo { color: var(--white); font-size: 1.1rem; display: block; margin-bottom: 20px; }
+    .footer-brand .logo span { font-size: 0.7425rem; }
+    .footer-tagline { font-size: 0.82rem; line-height: 1.8; color: rgba(237,233,226,0.45); max-width: 280px; }
+    .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 22px; }
+    .footer-col a { display: block; font-size: 0.82rem; color: rgba(237,233,226,0.55); text-decoration: none; margin-bottom: 12px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copyright { font-size: 0.72rem; color: rgba(237,233,226,0.3); letter-spacing: 0.04em; }
+    .social-row { display: flex; gap: 16px; margin-top: 28px; }
+    .social-icon { width: 38px; height: 38px; border: 1px solid rgba(237,233,226,0.2); display: flex; align-items: center; justify-content: center; color: var(--mid); text-decoration: none; transition: all 0.25s; }
+    .social-icon:hover { border-color: var(--white); color: var(--white); }
+    .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      header { padding: 0 24px; }
+      .logo { font-size: 1.5rem; }
+      .logo span { font-size: 1.1rem; }
+      nav { display: none; }
+      .header-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .project-hero-content { flex-direction: column; padding: 0 24px 48px; align-items: flex-start; }
+      .project-back { left: 24px; }
+      .project-hero-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .project-info { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+      .project-aside { border-left: none; padding-left: 0; border-top: 1px solid rgba(0,0,0,0.07); padding-top: 40px; }
+      .gallery-section { padding: 0 24px 60px; background: var(--dark-section); }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.wide { grid-column: span 2; }
+      .tour-section { padding: 60px 24px; }
+      .project-cta-strip { flex-direction: column; padding: 60px 24px; align-items: flex-start; }
+      .cta-actions { flex-direction: column; width: 100%; }
+      footer { padding-left: 24px; padding-right: 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .meta-pill-btn { cursor: pointer; background: rgba(138,122,106,0.18); border-color: var(--accent); color: var(--white); font-family: var(--sans); transition: background 0.25s, color 0.25s; }
+    .meta-pill-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .meta-pill-btn { cursor: pointer; background: rgba(138,122,106,0.18); border-color: var(--accent); color: var(--white); font-family: var(--sans); transition: background 0.25s; }
+    .meta-pill-btn:hover { background: var(--accent); border-color: var(--accent); }
+  </style></head>
+
+
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" onclick="toggleMobileMenu()">×</button>
+    <a href="index.html">Home</a>
+    <a href="domus-virtual-portfolio.html">Portfolio</a>
+    <a href="domus-virtual-pricing.html">Pricing</a>
+    <a href="domus-virtual-contact.html">Contact</a>
+    <a href="domus-virtual-pricing.html#offerte" class="mobile-nav-cta">Gratis offerte</a>
+  </div>
+
+  <header>
+    <a href="index.html" class="logo">Domus <span>Virtual</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="domus-virtual-portfolio.html" class="active">Portfolio</a>
+      <a href="domus-virtual-pricing.html">Pricing</a>
+      <a href="domus-virtual-contact.html">Contact</a>
+    </nav>
+    <a href="domus-virtual-pricing.html#offerte" class="header-cta">Gratis offerte</a>
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+    <!-- ═══ HERO ═══ -->
+  <div class="project-hero">
+<img src="farma 8.jpg" alt="De Farmasie - Restaurant">
+    <div class="project-hero-overlay"></div>
+    <a href="domus-virtual-portfolio.html" class="project-back">Terug naar portfolio</a>
+    <div class="project-hero-content">
+      <div class="project-hero-text">
+        <span class="project-cat">Restaurant · G&M 12,5/20 · Vosselaar </span>
+        <h1>De Farmasie<br><em>Vosselaar</em></h1>
+      </div>
+      <div class="project-hero-meta">
+        <button class="meta-pill meta-pill-btn" onclick="document.getElementById('tour-section').scrollIntoView({behavior:'smooth'})">&#x2193; 360° virtuele tour</button>
+        <span class="meta-pill">Gault & Millau 12,5/20</span>
+        <span class="meta-pill">2026</span>
+      </div>
+    </div>
+  </div>
+
+    <!-- ═══ PROJECT INFO ═══ -->
+  <section class="tour-section" id="tour-section">
+    <div class="tour-header reveal">
+      <h2>Ontdek de<br><em>virtuele tour</em></h2>
+      <p>Verken het restaurant van binnen — ontdek de ruimte en de sfeer voor je een reservering maakt.</p>
+    </div>
+    <div class="captur3d-3d-tour reveal">
+      <iframe
+        src="https://captur3d.io/view/domus-2/de-farmasie"
+        frameborder="0"
+        allowfullscreen=""
+        mozallowfullscreen="true"
+        webkitallowfullscreen="true"
+        allow="xr-spatial-tracking; clipboard-write"
+        title="De Farmasie – virtuele tour"
+      ></iframe>
+    </div>
+    <div class="project-partner-link reveal" style="margin-top:16px;">
+      <a href="https://www.defarmasie.be" target="_blank" rel="noopener noreferrer" class="btn-outline">Naar De Farmasie website</a>
+    </div>
+  </section>
+
+<!-- ═══ GALLERY ═══ -->
+  <section class="project-info">
+    <div class="project-description reveal">
+      <h2>Gastronomische ervaring<br><em>in Vosselaar</em></h2>
+      <p>In het sfeervol interieur, waar een authentiek 17e-eeuws apothekerskabinet en verfijnde lambriseringen de toon zetten, serveert chef Verheyen een keuken die eerlijkheid verheft tot kunst. Verse groenten komen rechtstreeks van lokale boeren, vlees rijpt traag boven de houtoven, en elke smaak wordt met chirurgische precisie in balans gebracht.</p>
+      <p>De Farmasie draagt trots de Michelin Bib Gourmand én een notering in Gault&Millau — een bewijs dat uitzonderlijke kwaliteit en toegankelijkheid hand in hand kunnen gaan. Geen restaurant, maar een recept voor de herinnering.</p>
+      <div class="project-cta-row">
+        <a href="https://captur3d.io/view/domus/de-farmasie" target="_blank" rel="noopener noreferrer" class="btn-primary">Virtuele tour bekijken</a>
+        <a href="domus-virtual-pricing.html#offerte" class="btn-outline">Offerte aanvragen</a>
+      </div>
+    </div>
+    <div class="project-aside reveal">
+      <div class="aside-item">
+        <div class="aside-label">Naam</div>
+        <div class="aside-value">De Farmasie</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-label">Type</div>
+        <div class="aside-value">Restaurant</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-label">Locatie</div>
+        <div class="aside-value">Antwerpsesteenweg 223<br>2350 Vosselaar</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-label">Onderscheiding</div>
+        <div class="aside-value">Gault & Millau 12,5/20</div>
+      </div>
+            <div class="aside-item">
+        <div class="aside-label">Chef</div>
+        <div class="aside-value">Lode Verheyen</div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-label">Formaat tour</div>
+        <div class="aside-value">360° interactief</div>
+      </div>
+    </div>
+  </section>
+
+   <!-- === GALERIJ === -->
+<section class="gallery-section">
+ <div class="gallery-grid">
+
+  <div class="gallery-item wide reveal">
+    <img src="farma 1.webp" alt="De Farmasie - keuken">
+  </div>
+  <div class="gallery-item reveal">
+    <img src="farma 2.webp" alt="De Farmasie - gerecht">
+  </div>
+  
+  <div class="gallery-item wide reveal">
+    <img src="farma 3.webp" alt="De Farmasie - interieur">
+  </div>
+  
+  <div class="gallery-item reveal">
+    <img src="farma 4.jpg" alt="De Farmasie - sfeer">
+  </div>
+
+  <div class="gallery-item reveal">
+    <img src="farma 5.jpg" alt="De Farmasie - restaurant">
+  </div>
+
+  <div class="gallery-item reveal">
+    <img src="farma 6.jpg" alt="De Farmasie - interieur">
+  </div>
+
+  <div class="gallery-item reveal">
+    <img src="farma 7.jpg" alt="De Farmasie - ambiance">
+  </div>
+ss
+  <div class="gallery-item wide reveal">
+    <img src="farma 8.jpg" alt="De Farmasie - koken">
+  </div>
+  
+  <div class="gallery-item reveal">
+    <img src="farma 9.jpg" alt="De Farmasie - bord">
+  </div>
+
+  
+  <div class="gallery-item reveal">
+    <img src="farma 10.webp" alt="De Farmasie - bereiding">
+  </div>
+
+  <div class="gallery-item reveal">
+    <img src="Farma 11.jpg" alt="De Farmasie - bereiding">
+  </div>
+  
+
+</div>
+</section>
+
+ <!-- ═══ CTA ═══ -->
+  <div class="project-cta-strip reveal">
+    <div>
+      <h2>Volgend project:<br><em>Hert, Turnhout</em></h2>
+    </div>
+    <div class="cta-actions">
+      <a href="domus-virtual-project-hert.html" class="btn-dark">Bekijk Hert →</a>
+      <a href="domus-virtual-pricing.html#offerte" class="btn-outline">Gratis offerte</a>
+    </div>
+  </div>
+
+
+   <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">Domus <span>Virtual</span></a>
+        <p class="footer-tagline">Wij brengen jouw ruimte in beeld met meeslepende 360° virtuele tours.</p>
+        <div class="social-row">
+          <a href="https://www.instagram.com/domusvirtual" target="_blank" rel="noopener noreferrer" class="social-icon"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigatie</h4>
+        <a href="index.html">Home</a>
+        <a href="domus-virtual-portfolio.html">Portfolio</a>
+        <a href="domus-virtual-pricing.html">Pricing</a>
+        <a href="domus-virtual-contact.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+32483669952">+32 483 66 99 52</a>
+        <a href="mailto: domus.virtual@outlook.com"><span class="__cf_email__" data-cfemail="43272c2e36306d352a313736222f032c36372f2c2c286d202c2e">domus.virtual@outlook.com</span></a>
+        <a href="https://www.instagram.com/domusvirtual" target="_blank" rel="noopener noreferrer">@domusvirtual</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2026 DOMUS Virtual. Alle rechten voorbehouden.</span>
+      <span class="footer-copyright">Belgium</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function toggleMobileMenu() {
+      const nav = document.getElementById('mobileNav');
+      const toggle = document.getElementById('menuToggle');
+      nav.classList.toggle('open');
+      toggle.classList.toggle('open');
+    }
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 80); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.10 });
+    reveals.forEach(el => observer.observe(el));
+    const header = document.querySelector('header');
+    </script>
