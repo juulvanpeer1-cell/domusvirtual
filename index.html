@@ -320,7 +320,14 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
+      margin-bottom: 25px;
+          justify-content: center;
+    }
+    .embed-instruction {
       margin-bottom: 52px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
     }
     .embed-header h2 {
       font-family: var(--serif);
@@ -339,6 +346,7 @@
       padding-bottom: 2px;
       opacity: 0.6;
       transition: opacity 0.25s;
+      padding-top: 25px;
     }
     .embed-header a:hover { opacity: 1; }
 
@@ -748,7 +756,7 @@
       .testimonials-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 40px; }
       .embed-section, .testimonials, footer { padding-left: 24px; padding-right: 24px; }
-      .embed-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .embed-header { flex-direction: column; align-items: center; gap: 16px; }
       .project-grid {
     display: flex !important;
     overflow-x: auto !important;
@@ -794,9 +802,9 @@
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="hero-video-wrap">
-      <!-- VIDEO ACHTERGROND: zorg dat "studio SB.mp4" in dezelfde map staat als dit HTML-bestand -->
+      <!-- VIDEO ACHTERGROND: zorg dat "studio-sb.mp4" in dezelfde map staat als dit HTML-bestand -->
       <video class="hero-bg-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
-      <source src="studiosb2.mp4" type="video/mp4">
+        <source src="studio-sb.mp4" type="video/mp4">
         <p>Je browser ondersteunt geen video-background. Gebruik een moderne browser of voeg dit bestand opnieuw toe.</p>
       </video>
     </div>
@@ -849,8 +857,12 @@
   <section class="embed-section" id="demo">
     <div class="embed-header reveal">
       <h2>Probeer het zelf<br><em></em></h2>
-      <a href="domus-virtual-portfolio.html">Bekijk alle projecten →</a>
     </div>
+
+    <div  class="reveal">
+        <p class="embed-instruction">Klik en sleep op de 3D-tour om rond te kijken — tik op de witte cirkels op de vloer om door de ruimte te bewegen.</p>
+    </div>  
+
     <div class="reveal">
       <div class="captur3d-3d-tour">
         <iframe class="captur3d-3d-tour__iframe"
@@ -867,6 +879,9 @@
         </iframe>
       </div>
     </div>
+        <div class="embed-header reveal">
+              <a href="domus-virtual-portfolio.html">Bekijk alle projecten →</a>
+       </div>
   </section>
 
   <!-- ═══ PORTFOLIO ═══ -->
